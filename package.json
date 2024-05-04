@@ -13,7 +13,7 @@
   },
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build"
+    "pack": "vite build"
   },
   "eslintConfig": {
     "extends": [
