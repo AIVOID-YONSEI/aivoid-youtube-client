@@ -12,9 +12,7 @@ const htmlTitle = document.querySelector('title');
 htmlTitle.textContent = sessionStorage.getItem('htmlTitle') || 'Youtube';
 
 function App({ youtube }) {
-  const [videos, setVideos] = useState(() =>
-    JSON.parse(sessionStorage.getItem('videos')) || null
-  );
+  const [videos, setVideos] = useState(() => JSON.parse(sessionStorage.getItem('videos')) || null);
   const [loading, setLoading] = useState(true);
   const history = useHistory();
 
@@ -26,45 +24,46 @@ function App({ youtube }) {
       selectedVideo = video;
       youtube
         .getRcmData(video.videoId)
-        .then(videos => {
+        .then((videos) => {
           setVideos(videos);
           setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-    }, [youtube, history]);
+    },
+    [youtube, history]
+  );
 
   const handleSearch = useCallback(
-    query => {
+    (query) => {
       htmlTitle.textContent = `(8) ${query} - Youtube`;
       history.push(`/results?search_query=${query}`);
       setLoading(true);
       selectedVideo = null;
-      youtube
-        .getSearchResult(query)
-        .then(videos => {
-          setVideos(videos);
-          setLoading(false);
-        });
-    }, [youtube, history]
+      youtube.getSearchResult(query).then((videos) => {
+        setVideos(videos);
+        setLoading(false);
+      });
+    },
+    [youtube, history]
   );
 
-  const clickLogo = useCallback(
-    () => {
-      htmlTitle.textContent = 'Youtube';
-      history.push('/');
-      setLoading(true);
-      setVideos(defaultVideos);
-      setLoading(false);
-    }, [defaultVideos, history]);
+  const clickLogo = useCallback(() => {
+    htmlTitle.textContent = 'Youtube';
+    history.push('/');
+    setLoading(true);
+    setVideos(defaultVideos);
+    setLoading(false);
+  }, [history]);
 
   useEffect(() => {
     if (!defaultVideos) {
-      youtube
-        .getMostPopular()
-        .then(videos => {
-          setVideos(videos);
-          setLoading(false);
-          defaultVideos = videos;
-        });
+      youtube.getMostPopular().then((videos) => {
+        setVideos(videos);
+        setLoading(false);
+        defaultVideos = videos;
+      });
     } else {
       setLoading(false);
     }
@@ -75,7 +74,7 @@ function App({ youtube }) {
     sessionStorage.setItem('videos', JSON.stringify(videos));
     sessionStorage.setItem('selectedVideo', JSON.stringify(selectedVideo));
     sessionStorage.setItem('defaultVideos', JSON.stringify(defaultVideos));
-  }, [videos, selectedVideo]);
+  }, [videos]);
 
   return (
     <div className={styles.app}>
@@ -83,35 +82,18 @@ function App({ youtube }) {
       <section className={styles.sidebarAndContent}>
         <Switch>
           <Route path="/" exact>
-            <Home
-              clickLogo={clickLogo}
-              youtube={youtube}
-              videos={videos}
-              selectVideo={selectVideo}
-              loading={loading}
-            />
+            <Home clickLogo={clickLogo} youtube={youtube} videos={videos} selectVideo={selectVideo} loading={loading} />
           </Route>
           <Route path="/results">
-            <Search
-              clickLogo={clickLogo}
-              youtube={youtube}
-              videos={videos}
-              selectVideo={selectVideo}
-              loading={loading}
-            />
+            <Search clickLogo={clickLogo} youtube={youtube} videos={videos} selectVideo={selectVideo} loading={loading} />
           </Route>
           <Route path="/watch">
-            <Watch
-              youtube={youtube}
-              videos={videos}
-              selectVideo={selectVideo}
-              selectedVideo={selectedVideo}
-              loading={loading}
-            />
+            <Watch youtube={youtube} videos={videos} selectVideo={selectVideo} selectedVideo={selectedVideo} loading={loading} />
           </Route>
         </Switch>
       </section>
-    </div>);
+    </div>
+  );
 }
 
 export default App;
