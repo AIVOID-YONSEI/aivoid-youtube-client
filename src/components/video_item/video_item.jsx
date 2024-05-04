@@ -1,6 +1,8 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { memo, useState, useEffect, useRef } from 'react';
 import styles from './video_item.module.css';
 import * as common from '../../common';
+import { Tooltip } from 'antd';
+import { CheckCircleTwoTone, WarningTwoTone } from '@ant-design/icons';
 //video 안에 있는 key인 snippet도 deconstructing이 된다
 
 const VideoItem = memo(({ video, video: { snippet }, onVideoClick, display, youtube, channelImg, search }) => {
@@ -47,6 +49,9 @@ const VideoItem = memo(({ video, video: { snippet }, onVideoClick, display, yout
       });
   }, [snippet, video, youtube]);
 
+  const aiVoicePercentage = useRef(Math.random());
+  const isAIVoiceIncluded = useRef(aiVoicePercentage.current > 0.5 ? true : false);
+
   return (
     <>
       {loading === true ? (
@@ -57,7 +62,18 @@ const VideoItem = memo(({ video, video: { snippet }, onVideoClick, display, yout
           <div className={styles.metadata}>
             {channelImg && !search && <img src={videoData.channelImg} className={styles.channelImg} alt="channel" />}
             <div className={styles.infoBox}>
-              <p className={styles.videoTitle}>{videoData.videoTitle}</p>
+              <p className={styles.videoTitle}>
+                {videoData.videoTitle.slice(0, 40)}
+                {isAIVoiceIncluded.current ? (
+                  <Tooltip placement="topLeft" title={'해당 영상은 AI 음성이 포함되어 있지 않습니다.'} color="blue">
+                    <CheckCircleTwoTone style={{ fontSize: '1rem', marginLeft: '5px', maringTop: '10px' }} twoToneColor="blue" />
+                  </Tooltip>
+                ) : (
+                  <Tooltip placement="topLeft" title={`해당 영상은 AI 음성이 ${`${Math.ceil(aiVoicePercentage.current * 100)}%`} 포함되어 있습니다.`} color="red">
+                    <WarningTwoTone style={{ fontSize: '1rem', marginLeft: '5px' }} twoToneColor="red" />
+                  </Tooltip>
+                )}
+              </p>
               {search && (
                 <p className={styles.viewCountAndDate}>
                   {`조회수 ${common.countConverter(videoData.viewCount)}회 • `}

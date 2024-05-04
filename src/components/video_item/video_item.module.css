@@ -1,20 +1,20 @@
-.video{
-    padding-bottom:0.7em;
-    cursor: pointer;
+.video {
+  padding-bottom: 0.7em;
+  cursor: pointer;
 }
 /* grid일 때 */
-.grid{
-  flex:1 1 14rem; 
+.grid {
+  flex: 1 1 14rem;
   max-width: 17rem;
   display: flex;
   flex-direction: column;
-  padding:0.5em;
+  padding: 0.5em;
 }
-.grid .thumbnail{
+.grid .thumbnail {
   width: 100%;
-  margin-bottom:0.7em;
+  margin-bottom: 0.7em;
 }
-.grid .metadata{
+.grid .metadata {
   padding: 4px;
   color: var(--color-light-gray);
   display: flex;
@@ -22,88 +22,93 @@
 }
 
 /* list일 때 */
-.list{
+.list {
   display: flex;
   width: 100%;
 }
-.list .thumbnail{
+.list .thumbnail {
   width: 170px;
-  height:94px;
+  height: 94px;
 }
-.list .metadata{
-  width:70%;
+.list .metadata {
+  width: 70%;
   margin-left: 0.5em;
 }
 /* search일 때 */
-.list.search .thumbnail{
+.list.search .thumbnail {
   width: 18rem;
-  height:10rem;
+  height: 10rem;
 }
-.list.search .metadata{
+.list.search .metadata {
   flex: 1 1 100%;
 }
-.searchChannelImg{
+.searchChannelImg {
   margin: 0.5em 0.5em 0.5em 0;
-  width:25px;
-  height:25px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
 }
-.channelImg{
-  width:1.8rem;
-    height:1.8rem;
-    border-radius: 50%;
+.channelImg {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
   margin-right: 0.8em;
 }
-.channelBox{
+.channelBox {
   display: flex;
   align-items: center;
 }
 .channelName {
   font-size: 0.6rem;
 }
-.search .channelName{
+.search .channelName {
   font-size: 0.8rem;
 }
-.videoTitle{
+.videoTitle {
   color: white;
   display: -webkit-box;
-overflow: hidden;
--webkit-line-clamp: 2; 
--webkit-box-orient: vertical;
-font-size: 0.7rem;
-margin-bottom:0.5em;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 0.7rem;
+  margin-bottom: 0.5em;
 }
-.search .videoTitle{
+.search .videoTitle {
   font-size: 1rem;
 }
-.channelName,.viewCountAndDate,.description{
+.channelName,
+.viewCountAndDate,
+.description {
   color: var(--color-light-gray);
   font-size: 0.6rem;
 }
-.search .channelName,.search .viewCountAndDate,.search .description{
+.search .channelName,
+.search .viewCountAndDate,
+.search .description {
   font-size: 0.7rem;
 }
 
-.description{
+.description {
   display: -webkit-box;
   overflow: hidden;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   font-size: 0.7rem;
 }
-@media screen and (max-width:960px){
-  .videoTitle{
+@media screen and (max-width: 960px) {
+  .videoTitle {
     font-size: 0.8rem;
   }
-  .channelName,.viewCountAndDate,.description{
+  .channelName,
+  .viewCountAndDate,
+  .description {
     font-size: 0.75rem;
   }
   /* search일 때 */
-  .list.search .thumbnail{
+  .list.search .thumbnail {
     flex: 1 1 40%;
-  
   }
-  .list.search .metadata{
+  .list.search .metadata {
     flex: 1 1 60%;
   }
 }

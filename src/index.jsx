@@ -7,9 +7,15 @@ import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 
+const apiKey = (() => {
+  const keys = import.meta.env.VITE_YOUTUBE_API_KEYS.split(',');
+  console.log(keys);
+  return keys[Math.floor(Math.random() * keys.length)];
+})();
+
 const httpClient = axios.create({
   baseURL: 'https://www.googleapis.com/youtube/v3',
-  params: { key: import.meta.env.VITE_YOUTUBE_API_KEY },
+  params: { key: apiKey },
 });
 const youtube = new Youtube(httpClient);
 
