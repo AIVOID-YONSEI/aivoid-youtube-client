@@ -9,7 +9,6 @@ import { createRoot } from 'react-dom/client';
 
 const apiKey = (() => {
   const keys = import.meta.env.VITE_YOUTUBE_API_KEYS.split(',');
-  console.log(keys);
   return keys[Math.floor(Math.random() * keys.length)];
 })();
 
