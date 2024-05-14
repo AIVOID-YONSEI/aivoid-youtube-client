@@ -1,18 +1,18 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import styles from './app.module.css';
-import { Route, Switch, useHistory } from 'react-router';
-import Home from './pages/home';
-import Search from './pages/search';
-import Watch from './pages/watch';
-import SearchHeader from './components/search_header/search_header';
+import React, { useCallback, useEffect, useState } from "react";
+import styles from "./app.module.css";
+import { Route, Switch, useHistory } from "react-router";
+import Home from "./views/home";
+import Search from "./views/search";
+import Watch from "./views/watch";
+import SearchHeader from "./components/search_header/search_header";
 
-let selectedVideo = JSON.parse(sessionStorage.getItem('selectedVideo')) || null;
-let defaultVideos = JSON.parse(sessionStorage.getItem('defaultVideos')) || null;
-const htmlTitle = document.querySelector('title');
-htmlTitle.textContent = sessionStorage.getItem('htmlTitle') || 'Youtube';
+let selectedVideo = JSON.parse(sessionStorage.getItem("selectedVideo")) || null;
+let defaultVideos = JSON.parse(sessionStorage.getItem("defaultVideos")) || null;
+const htmlTitle = document.querySelector("title");
+htmlTitle.textContent = sessionStorage.getItem("htmlTitle") || "Youtube";
 
 function App({ youtube }) {
-  const [videos, setVideos] = useState(() => JSON.parse(sessionStorage.getItem('videos')) || null);
+  const [videos, setVideos] = useState(() => JSON.parse(sessionStorage.getItem("videos")) || null);
   const [loading, setLoading] = useState(true);
   const history = useHistory();
 
@@ -32,7 +32,7 @@ function App({ youtube }) {
           console.log(error);
         });
     },
-    [youtube, history]
+    [youtube, history],
   );
 
   const handleSearch = useCallback(
@@ -46,12 +46,12 @@ function App({ youtube }) {
         setLoading(false);
       });
     },
-    [youtube, history]
+    [youtube, history],
   );
 
   const clickLogo = useCallback(() => {
-    htmlTitle.textContent = 'Youtube';
-    history.push('/');
+    htmlTitle.textContent = "Youtube";
+    history.push("/");
     setLoading(true);
     setVideos(defaultVideos);
     setLoading(false);
@@ -70,10 +70,10 @@ function App({ youtube }) {
   }, [youtube]);
 
   useEffect(() => {
-    sessionStorage.setItem('htmlTitle', htmlTitle.textContent);
-    sessionStorage.setItem('videos', JSON.stringify(videos));
-    sessionStorage.setItem('selectedVideo', JSON.stringify(selectedVideo));
-    sessionStorage.setItem('defaultVideos', JSON.stringify(defaultVideos));
+    sessionStorage.setItem("htmlTitle", htmlTitle.textContent);
+    sessionStorage.setItem("videos", JSON.stringify(videos));
+    sessionStorage.setItem("selectedVideo", JSON.stringify(selectedVideo));
+    sessionStorage.setItem("defaultVideos", JSON.stringify(defaultVideos));
   }, [videos]);
 
   return (
