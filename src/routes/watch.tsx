@@ -1,5 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import Watch from "../views/watch";
 
-export const Route = createFileRoute('/watch')({
-  component: () => <div>Hello /watch!</div>
-})
+export const Route = createFileRoute("/watch")({
+  component: () => <Watch />,
+});
