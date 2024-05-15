@@ -68,4 +68,15 @@ class Youtube {
     return Promise.all([this.fetchVideoData(videoId), this.fetchChannelData(channelId)]);
   }
 }
-export default Youtube;
+
+const key = (function getKey() {
+  const splitted = import.meta.env.VITE_YOUTUBE_API_KEY.split(",");
+  return splitted[Math.floor(Math.random() * splitted.length)];
+})();
+
+const httpClient = axios.create({
+  baseURL: "https://www.googleapis.com/youtube/v3",
+  params: { key },
+});
+
+export const youtube = new Youtube(httpClient);
