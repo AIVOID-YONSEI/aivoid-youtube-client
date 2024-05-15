@@ -1,15 +1,12 @@
+import { useLoaderData } from "@tanstack/react-router";
 import VideoList from "../components/video_list/video_list";
 import styles from "./home.module.css";
-import Sidebar from "../components/sidebar/sidebar";
 
-const Home = () => {
+const Home = ({ data }: { data: any }) => {
   return (
-    <>
-      <Sidebar />
-      <section className={`${styles.grid} ${styles.content}`}>
-        <VideoList videos={[]} display="grid" channelImg={true} search={false} youtube={undefined} onVideoClick={undefined} />
-      </section>
-    </>
+    <section className={`${styles.grid} ${styles.content}`}>
+      <VideoList videos={data} display="grid" search={undefined} channelImg={undefined} youtube={undefined} onVideoClick={undefined} />
+    </section>
   );
 };
 
