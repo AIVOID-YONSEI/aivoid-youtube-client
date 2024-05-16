@@ -41,4 +41,5 @@ export const Route = createFileRoute("/")({
     const { filter } = Route.useSearch();
     return <HomePending filter={filter ?? 0} />;
   },
+  gcTime: 0,
 });
