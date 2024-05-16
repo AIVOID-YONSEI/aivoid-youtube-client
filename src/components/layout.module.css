@@ -1,104 +1,107 @@
-html{
+html {
   font-size: 20px;
 }
-:root{
+:root {
   /*  color */
-  --color-black:#181818;
+  --color-black: #181818;
   --color-dark-gray: #202020;
-  --color-gray:#313131;
-  --color-middle-gray:#909090;
-  --color-light-gray:#AAAAAA;
-  --color-blue:#4195f0;
-  --color-red:#cc0001;
-  --color-white:rgb(247, 247, 247);
+  --color-gray: #313131;
+  --color-middle-gray: #909090;
+  --color-light-gray: #aaaaaa;
+  --color-blue: #4195f0;
+  --color-red: #cc0001;
+  --color-white: rgb(247, 247, 247);
 }
-*{
-  font-family: 'Roboto', sans-serif;
+* {
+  font-family: "Roboto", sans-serif;
   margin: 0;
 }
-a{
+a {
   text-decoration: none;
 }
-button{
-  border:none;
+button {
+  border: none;
   outline: none;
   cursor: pointer;
   background-color: transparent;
 }
-body{
+body {
   background: var(--color-black);
 }
-.app{
+.app {
   color: white;
   width: 100%;
 }
-.sidebarAndContent{
+.sidebarAndContent {
   display: flex;
   align-items: flex-start;
 }
-.content{
-  display:flex;
+.content {
+  display: flex;
   margin-top: 2.7em;
 }
-.grid{
-   padding: 0.8rem 1rem 0.8rem 5.3rem;
+.grid {
+  padding: 0.8rem 1rem 0.8rem 5.3rem;
 }
-.list.search{
-  padding:1.5em 1.5em 0 5.8rem;
+.list.search {
+  padding: 1.5em 1.5em 0 5.8rem;
 }
-.list{
-  padding:1.5em 0 0 3em;
+.list {
+  padding: 1.5em 0 0 3em;
 }
 
-.loadingScreen{
+.loadingScreen {
   width: 100%;
-  height:90vh;
+  height: 90vh;
   position: relative;
 }
-.loadingSpinner{
+.loadingSpinner {
   position: absolute;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
-  width:30px;
-  height:30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  border:5px solid rgb(179, 194, 201);
+  border: 5px solid rgb(179, 194, 201);
   border-top: 5px solid rgb(64, 72, 75);
   animation: spin 1s linear infinite;
 }
-@keyframes spin{
-  0% {transform: rotate(0deg);}
-  100%{transform: rotate(360deg);}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-@media screen and (max-width:960px){
-  html{
+@media screen and (max-width: 960px) {
+  html {
     font-size: 19px;
   }
-  .content{
-    flex-direction:column;
+  .content {
+    flex-direction: column;
     margin-top: 3em;
   }
-  .list{
+  .list {
     padding: 1.5em 0 1.5em 1.5em;
-    width:100%;
+    width: 100%;
   }
-  .list.search{
+  .list.search {
     padding: 1.5em 0 1.5em 5.5em;
-    
   }
-  .grid{
-    padding: 1.5em 1.5em 1.5em 5.5em ;
+  .grid {
+    padding: 1.5em 1.5em 1.5em 5.5em;
   }
 }
-@media screen and (max-width:680px){
-  html{
+@media screen and (max-width: 680px) {
+  html {
     font-size: 18px;
   }
-  .grid{
+  .grid {
     padding: 0.8rem 0rem;
   }
-  .list.search{
+  .list.search {
     padding: 1.5em;
   }
 }

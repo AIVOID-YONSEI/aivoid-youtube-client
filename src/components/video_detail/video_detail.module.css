@@ -1,42 +1,42 @@
-.playVideoBox{
-    flex: 1 1 63%;
-    margin-right: 1.5em;
+.playVideoBox {
+  width: 100%;
+  margin-right: 1.5em;
 }
-.iframeBox{
-    margin-bottom: 1em;
-    position: relative;
-    width:100%;
-    padding-bottom: 56.25%;
+.iframeBox {
+  margin-bottom: 1em;
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
 }
-iframe{
-    position: absolute;
-    top:0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
-.videoContainer{
-    width: 100%;
-    font-size:12px;
-    border-bottom: 1.35px solid var(--color-gray);
-    padding-bottom: 1.5em;
-    margin-bottom: 1em;
+.videoContainer {
+  width: 100%;
+  font-size: 12px;
+  border-bottom: 1.35px solid var(--color-gray);
+  padding-bottom: 1.5em;
+  margin-bottom: 1em;
 }
-.tags{
-    color: var(--color-blue);
-    font-weight: 500;
+.tags {
+  color: var(--color-blue);
+  font-weight: 500;
 }
-.title{
-    font-size: 1rem;
-    font-weight: 400;
+.title {
+  font-size: 1rem;
+  font-weight: 400;
 }
-.comments1{
-    font-size: 0.8rem;
-    padding: 1em 0;
+.comments1 {
+  font-size: 0.8rem;
+  padding: 1em 0;
 }
 
-@media screen and (max-width:960px){
-    .comments1{
-        display:none;
-    }
+@media screen and (max-width: 960px) {
+  .comments1 {
+    display: none;
+  }
 }

@@ -11,16 +11,11 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as WatchImport } from './routes/watch'
 import { Route as SearchImport } from './routes/search'
 import { Route as IndexImport } from './routes/index'
+import { Route as WatchVideoIdImport } from './routes/watch.$videoId'
 
 // Create/Update Routes
-
-const WatchRoute = WatchImport.update({
-  path: '/watch',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const SearchRoute = SearchImport.update({
   path: '/search',
@@ -29,6 +24,11 @@ const SearchRoute = SearchImport.update({
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const WatchVideoIdRoute = WatchVideoIdImport.update({
+  path: '/watch/$videoId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -50,11 +50,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchImport
       parentRoute: typeof rootRoute
     }
-    '/watch': {
-      id: '/watch'
-      path: '/watch'
-      fullPath: '/watch'
-      preLoaderRoute: typeof WatchImport
+    '/watch/$videoId': {
+      id: '/watch/$videoId'
+      path: '/watch/$videoId'
+      fullPath: '/watch/$videoId'
+      preLoaderRoute: typeof WatchVideoIdImport
       parentRoute: typeof rootRoute
     }
   }
@@ -65,7 +65,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
   SearchRoute,
-  WatchRoute,
+  WatchVideoIdRoute,
 })
 
 /* prettier-ignore-end */

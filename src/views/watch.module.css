@@ -8,7 +8,8 @@
 }
 
 .list {
-  padding: 1.5em 0 0 3em;
+  padding: 1.5em 1.5em 0 6em;
+  width: 100%;
 }
 
 .loadingscreen {

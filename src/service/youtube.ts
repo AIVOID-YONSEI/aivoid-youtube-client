@@ -1,5 +1,60 @@
 import axios, { AxiosInstance } from "axios";
 
+export type TMostPopularVideo = {
+  id: string;
+  snippet: {
+    channelId: string;
+  };
+};
+
+export type TRecommendVideo = {
+  id: {
+    videoId: string;
+  };
+  snippet: {
+    channelId: string;
+  };
+};
+
+export type TVideo = {
+  id: string;
+  snippet: {
+    publishedAt: string;
+    title: string;
+    description: string;
+    thumbnails: {
+      medium: {
+        url: string;
+      };
+      maxres: {
+        url: string;
+      };
+    };
+    tags?: string[];
+    channelId: string;
+  };
+  statistics: {
+    viewCount: string;
+    likeCount: string;
+    commentCount: string;
+  };
+};
+
+export type TChannel = {
+  id: string;
+  snippet: {
+    title: string;
+    thumbnails: {
+      default: {
+        url: string;
+      };
+    };
+  };
+  statistics: {
+    subscriberCount: string;
+  };
+};
+
 class Youtube {
   private youtube: AxiosInstance;
 
@@ -17,12 +72,7 @@ class Youtube {
         regionCode: "KR",
       },
     });
-    return response.data.items as {
-      id: string;
-      snippet: {
-        channelId: string;
-      };
-    }[];
+    return response.data.items as TMostPopularVideo[];
   }
 
   async getSearchResult(query: string) {
@@ -35,6 +85,8 @@ class Youtube {
         fields: "items(id(videoId),snippet(channelId))",
       },
     });
+
+    // FIXME: This is a temporary fix for the issue that the response data is not consistent with the type definition.
     return response.data.items.map((item: { id: { videoId: any } }) => ({ ...item, id: item.id.videoId }));
   }
 
@@ -48,7 +100,7 @@ class Youtube {
         fields: "items(id.videoId,snippet(channelId))",
       },
     });
-    return response.data.items.map((item: { id: { videoId: any } }) => ({ ...item, id: item.id.videoId }));
+    return response.data.items as TRecommendVideo[];
   }
 
   async fetchVideoData(videoId: string) {
@@ -57,32 +109,12 @@ class Youtube {
         part: "snippet, statistics",
         id: videoId,
         fields:
-          "items(id,snippet(publishedAt,title,description,thumbnails.maxres.url,thumbnails.medium.url,tags),statistics(viewCount,likeCount,commentCount))",
+          "items(id,snippet(publishedAt,title,description,thumbnails.maxres.url,thumbnails.medium.url,tags,channelId),statistics(viewCount,likeCount,commentCount))",
       },
     });
-    return response.data.items[0] as {
-      id: string;
-      snippet: {
-        publishedAt: string;
-        title: string;
-        description: string;
-        thumbnails: {
-          medium: {
-            url: string;
-          };
-          maxres: {
-            url: string;
-          };
-        };
-        tags: string[];
-      };
-      statistics: {
-        viewCount: string;
-        likeCount: string;
-        commentCount: string;
-      };
-    };
+    return response.data.items[0] as TVideo;
   }
+
   async fetchChannelData(channelId: string) {
     const response = await this.youtube.get("channels", {
       params: {
@@ -91,20 +123,7 @@ class Youtube {
         fields: "items(id,snippet(title,thumbnails.default.url),statistics(subscriberCount))",
       },
     });
-    return response.data.items[0] as {
-      id: string;
-      snippet: {
-        title: string;
-        thumbnails: {
-          default: {
-            url: string;
-          };
-        };
-      };
-      statistics: {
-        subscriberCount: string;
-      };
-    };
+    return response.data.items[0] as TChannel;
   }
 
   getAllData(videoId: string, channelId: string) {

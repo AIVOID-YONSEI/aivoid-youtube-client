@@ -1,22 +1,21 @@
 .videos {
-    display: flex;
-    flex:1 1 37%;  
-    list-style: none;
-    padding-left: 0;
+  display: flex;
+  flex: 1 1 37%;
+  list-style: none;
+  padding-left: 0;
+}
+.grid {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.list {
+  flex-direction: column;
+}
+@media screen and (max-width: 960px) {
+  .videos.list {
+    width: 100%;
   }
-.grid{
-    flex-wrap: wrap;
-    justify-content: center;
+  .list {
+    padding-right: 1.5em;
   }
-.list{
-    flex-direction: column;
-    padding-right: 3em;
-  }
-@media screen and (max-width:960px){
-    .videos.list{
-      width: 100%;
-    }
-    .list{
-      padding-right: 1.5em;
-    }
 }

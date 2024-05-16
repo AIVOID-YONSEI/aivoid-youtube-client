@@ -5,11 +5,20 @@ import { youtube } from "../service/youtube";
 export const Route = createFileRoute("/")({
   loader: async () => {
     const populars = await youtube.getMostPopular();
-    return Promise.all(populars.map(({ id, snippet: { channelId } }) => youtube.getAllData(id, channelId)));
+    const allDatas = await Promise.all(
+      populars.map(async ({ id, snippet: { channelId } }) => {
+        const [video, channel] = await youtube.getAllData(id, channelId);
+        return { video, channel };
+      }),
+    );
+    return {
+      videos: allDatas.map(({ video }) => video),
+      channels: allDatas.map(({ channel }) => channel),
+    };
   },
-  component: () => {
-    const data = Route.useLoaderData();
+  component: function HomeComponent() {
+    const { videos, channels } = Route.useLoaderData();
 
-    return <Home data={data} />;
+    return <Home videos={videos} channels={channels} />;
   },
 });
