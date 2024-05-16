@@ -25,6 +25,6 @@ const queryClient = new QueryClient();
 
 createRoot($root).render(
   <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
+    <RouterProvider router={router} defaultPendingMs={1} defaultPendingMinMs={1000} />
   </QueryClientProvider>,
 );

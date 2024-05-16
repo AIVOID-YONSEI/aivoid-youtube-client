@@ -1,11 +1,10 @@
-import VideoList from "../components/video_list/video_list";
-import styles from "./home.module.css";
-import { TVideo, TChannel } from "../service/youtube";
-import { ConfigProvider, Flex, Slider } from "antd";
+import Skeleton from "../components/skeleton";
+import styles from "./home-pending.module.css";
 import { VectorSparkle } from "../assets";
+import { ConfigProvider, Flex, Slider } from "antd";
 import { useNavigate } from "@tanstack/react-router";
 
-const Home = ({ videos, channels, filter }: { videos: TVideo[]; channels: TChannel[]; filter: number }) => {
+export default function HomePending({ filter }: { filter: number }) {
   const navigate = useNavigate();
 
   return (
@@ -36,12 +35,11 @@ const Home = ({ videos, channels, filter }: { videos: TVideo[]; channels: TChann
             value={filter}
             onChange={(val) => navigate({ search: { filter: val } })}
             tooltip={{ formatter: (val) => `${val}%` }}
+            disabled
           />
         </ConfigProvider>
       </Flex>
-      <VideoList videos={videos} channels={channels} display="grid" />
+      <Skeleton count={10} />
     </section>
   );
-};
-
-export default Home;
+}

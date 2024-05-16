@@ -11,14 +11,14 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as SearchImport } from './routes/search'
+import { Route as SearchImport } from './routes/_search'
 import { Route as IndexImport } from './routes/index'
 import { Route as WatchVideoIdImport } from './routes/watch.$videoId'
 
 // Create/Update Routes
 
 const SearchRoute = SearchImport.update({
-  path: '/search',
+  id: '/_search',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -43,10 +43,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/search': {
-      id: '/search'
-      path: '/search'
-      fullPath: '/search'
+    '/_search': {
+      id: '/_search'
+      path: ''
+      fullPath: ''
       preLoaderRoute: typeof SearchImport
       parentRoute: typeof rootRoute
     }
@@ -64,7 +64,6 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  SearchRoute,
   WatchVideoIdRoute,
 })
 

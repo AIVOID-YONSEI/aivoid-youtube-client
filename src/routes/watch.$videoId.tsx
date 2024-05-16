@@ -1,6 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import Watch from "../views/watch";
 import { TVideo, youtube } from "../service/youtube";
+import WatchPending from "../views/watch-pending";
 
 export const Route = createFileRoute("/watch/$videoId")({
   loader: async ({ params: { videoId } }) => {
@@ -34,4 +35,5 @@ export const Route = createFileRoute("/watch/$videoId")({
     const { video, videos, channel, channels } = Route.useLoaderData();
     return <Watch video={video} videos={videos} channel={channel} channels={channels} />;
   },
+  pendingComponent: () => <WatchPending />,
 });
